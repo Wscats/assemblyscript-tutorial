@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        const importObj = {
+            main: {
+                sayHello() {
+                    console.log("Hello from WebAssembly!");
+                }
+            },
+            env: {
+                abort(_msg, _file, line, column) {
+                    console.error("abort called at main.ts:" + line + ":" + column);
+                }
+            },
+        };
+        WebAssembly.instantiateStreaming(fetch('assembly/f.wasm'), importObj)
+            .then((obj) => {
+                console.log(obj.instance.exports);
+                const exports = obj.instance.exports;
+                document.getElementById("container").textContent = "Result: " + exports.add(19, 90);
+            });
+    </script>
+</body>
+
+</html>

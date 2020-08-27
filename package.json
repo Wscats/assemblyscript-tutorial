@@ -1,0 +1,19 @@
+{
+  "name": "assemblyscript-demo",
+  "version": "0.1.0",
+  "description": "AssemblyScript demo",
+  "main": "index.js",
+  "repository": "github:dguo/assemblyscript-demo",
+  "scripts": {
+    "start": "static-server"
+  },
+  "author": {
+    "name": "Danny Guo",
+    "email": "danny@dannyguo.com",
+    "url": "https://dannyguo.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "static-server": "^2.2.1"
+  }
+}
