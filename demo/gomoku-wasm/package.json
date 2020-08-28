@@ -1,0 +1,25 @@
+{
+    "scripts": {
+        "asbuild:engine_untouched": "asc assembly/engine.ts -b build/engine_untouched.wasm -t build/engine_untouched.wat --sourceMap --validate --debug --use Math=JSMath",
+        "asbuild:engine_optimized": "asc assembly/engine.ts -b build/engine_optimized.wasm -t build/engine_optimized.wat --sourceMap --validate -O3 --use Math=JSMath",
+        "asbuild:gui_untouched": "asc node_modules/as2d/assembly/glue.ts assembly/gui.ts -b build/gui_untouched.wasm -t build/gui_untouched.wat --sourceMap --validate --debug --use Math=JSMath",
+        "asbuild:gui_optimized": "asc node_modules/as2d/assembly/glue.ts assembly/gui.ts -b build/gui_optimized.wasm -t build/gui_optimized.wat --sourceMap --validate -O3 --use Math=JSMath",
+        "asbuild": "npm run asbuild:engine_untouched && npm run asbuild:engine_optimized && npm run asbuild:gui_untouched && npm run asbuild:gui_optimized",
+        "pagebuild": "npx parcel build -d build index.html --public-url '.'",
+        "clean": "rm build/*",
+        "build": "npm run clean && npm run asbuild && npm run pagebuild",
+        "release": "rm docs/* && npm run build && cp build/* docs/",
+        "dev": "npm run asbuild && npx parcel serve -d build index.html"
+    },
+    "dependencies": {
+        "@types/node": "^11.13.5",
+        "as2d": "github:as2d/as2d",
+        "assemblyscript": "github:assemblyscript/assemblyscript"
+    },
+    "devDependencies": {
+        "@types/webassembly-js-api": "0.0.2",
+        "parcel-bundler": "^1.12.3",
+        "ts-loader": "^5.3.3",
+        "typescript": "^3.4.1"
+    }
+}

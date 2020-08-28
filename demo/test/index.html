@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="abc">233</div>
+        <script>
+            const wasmBrowserInstantiate = async (
+                wasmModuleUrl,
+                importObject
+            ) => {
+                let response = undefined;
+                if (!importObject) {
+                    importObject = {
+                        env: {
+                            abort: () => console.log("Abort!")
+                        }
+                    };
+                }
+                if (WebAssembly.instantiateStreaming) {
+                    response = await WebAssembly.instantiateStreaming(
+                        fetch(wasmModuleUrl),
+                        importObject
+                    );
+                } else {
+                    const fetchAndInstantiateTask = async () => {
+                        const wasmArrayBuffer = await fetch(wasmModuleUrl).then(
+                            response => response.arrayBuffer()
+                        );
+                        return WebAssembly.instantiate(
+                            wasmArrayBuffer,
+                            importObject
+                        );
+                    };
+                    response = await fetchAndInstantiateTask();
+                }
+                return response;
+            };
+
+            const runWasmAdd = async () => {
+                const wasmModule = await wasmBrowserInstantiate(
+                    "build/optimized.wasm",
+                    {
+                        index: {
+                            consoleLog: value =>
+                                window.console.log(
+                                    "Called from Wasm: " + value
+                                ),
+                            getDom: () =>
+                                document.getElementById("abc").innerHTML
+                        },
+                        env: {
+                            abort: () => console.log("Abort!")
+                        },
+                        Math,
+                        objects: {
+                            count: 2333
+                        },
+                        methods: {
+                            output(message) {
+                                console.log(`-----> ${message} <-----`);
+                            }
+                        }
+                    }
+                );
+                const {
+                    add,
+                    standardizeCellsWithMergeCells,
+                    memory,
+                    setRes,
+                    calculateMoveThresholds
+                } = wasmModule.instance.exports;
+                // standardizeCellsWithMergeCells()
+                const wasmMemArray = new Uint8Array(memory.buffer);
+                console.log(wasmMemArray.slice(0, 20));
+                console.log(wasmMemArray);
+                console.log(wasmMemArray[0]);
+                // console.log(add, standardizeCellsWithMergeCells());
+                standardizeCellsWithMergeCells();
+                console.log(wasmMemArray);
+                console.log(setRes());
+                console.log(calculateMoveThresholds()[0]);
+            };
+            runWasmAdd();
+        </script>
+    </body>
+</html>

@@ -1,22 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <body>
+        <div id="container"></div>
+        <script src="./instantiateWasm.js"></script>
+        <script src="./domConsole.js"></script>
+        <script>
+            const runWasmAdd = async () => {
+                const wasmModule = await wasmBrowserInstantiate(
+                    "assembly/f.wasm",
+                    {
+                        index: {
+                            consoleLog: value =>
+                                domConsoleLog("Called from Wasm: " + value)
+                        },
+                        env: {
+                            abort: () => console.log("Abort!")
+                        }
+                        // window: {
+                        //     alert: window.alert
+                        // }
+                    }
+                );
+                console.log(wasmModule.instance.exports);
+                const {
+                    computeSum,
+                    __retain,
+                    createArray,
+                    __allocArray,
+                    Int32Array_ID,
+                    sumArray
+                } = wasmModule.instance.exports;
+                // const standardizeCellsWithMergeCells = wasmModule.instance.exports.standardizeCellsWithMergeCells;
+                // console.log(computeSum);
+                // let arrayPtr = __retain(__allocArray(Int32Array_ID, [
+                //     3, 4, 5, 6, 7, 8, 9
+                // ]));
 
-<body>
-    <div id="container"></div>
-    <script src="./instantiateWasm.js"></script>
-    <script>
-        const runWasmAdd = async () => {
-            const wasmModule = await wasmBrowserInstantiate("assembly/f.wasm");
-            console.log(wasmModule.instance.exports);
-        };
-        runWasmAdd();
-    </script>
-</body>
-
+                let arrayPtr = createArray(5);
+                sumArray(arrayPtr);
+                console.log(arrayPtr, sumArray(arrayPtr));
+                // console.log(standardizeCellsWithMergeCells(['10']));
+                // console.log(wasmModule.instance.exports.computeSum(1))
+                // console.log(wasmModule.instance.exports._f(9))
+            };
+            runWasmAdd();
+        </script>
+    </body>
 </html>
