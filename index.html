@@ -9,25 +9,13 @@
 
 <body>
     <div id="container"></div>
+    <script src="./instantiateWasm.js"></script>
     <script>
-        const importObj = {
-            main: {
-                sayHello() {
-                    console.log("Hello from WebAssembly!");
-                }
-            },
-            env: {
-                abort(_msg, _file, line, column) {
-                    console.error("abort called at main.ts:" + line + ":" + column);
-                }
-            },
+        const runWasmAdd = async () => {
+            const wasmModule = await wasmBrowserInstantiate("assembly/f.wasm");
+            console.log(wasmModule.instance.exports);
         };
-        WebAssembly.instantiateStreaming(fetch('assembly/f.wasm'), importObj)
-            .then((obj) => {
-                console.log(obj.instance.exports);
-                const exports = obj.instance.exports;
-                document.getElementById("container").textContent = "Result: " + exports.add(19, 90);
-            });
+        runWasmAdd();
     </script>
 </body>
 
