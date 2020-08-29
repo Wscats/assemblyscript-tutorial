@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "asbuild:untouched": "asc assembly/index.ts --target debug",
+        "asbuild:untouched": "asc assembly/index.ts --target debug --sourceMap",
         "asbuild:optimized": "asc assembly/index.ts --target release",
         "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
         "test": "node tests",

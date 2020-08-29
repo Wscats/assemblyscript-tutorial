@@ -12,6 +12,41 @@ export function add(a: i32, b: i32): i32 {
     return a + b;
 }
 
+export function concat(a: string, b: string): string {
+    return a + b
+}
+
+// AssemblyScript
+export class Foo {
+    constructor(public str: string) { }
+    getString(): string {
+        return this.str
+    }
+}
+
+export function getFoo(): Foo { // this one
+    return new Foo("Hello world!")
+}
+
+// AssemblyScript
+export function getRandomArray(len: i32): Int32Array {
+    const arr = new Int32Array(len)
+    for (let i = 0; i < arr.length; ++i) {
+        arr[i] = i
+    }
+    // fill with random values
+    return arr
+}
+
+export function sum(arr: Int32Array): i32 {
+    let sum = 0
+    for (let i = 0, k = arr.length; i < k; ++i) {
+        sum += unchecked(arr[i])
+    }
+    return sum
+}
+export const Int32Array_ID = idof<Int32Array>()
+
 declare function consoleLog(arg0: string): void;
 declare function getDom(): string;
 
@@ -74,13 +109,13 @@ export function setRes(): u8 {
 store<u8>(2, 3);
 store<u8>(3, 4);
 
-export function calculateMoveThresholds(): StaticArray<u64> {
-    const thresholds = new StaticArray<u64>(63);
-    let threshold: f32 = 2;
-    for (let depth = 0; depth < 63; depth++) {
-        unchecked((thresholds[depth] = u64(threshold)));
-        threshold *= 1.6;
-    }
+// export function calculateMoveThresholds(): StaticArray<u64> {
+//     const thresholds = new StaticArray<u64>(63);
+//     let threshold: f32 = 2;
+//     for (let depth = 0; depth < 63; depth++) {
+//         unchecked((thresholds[depth] = u64(threshold)));
+//         threshold *= 1.6;
+//     }
 
-    return thresholds;
-}
+//     return thresholds;
+// }

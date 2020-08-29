@@ -17,9 +17,41 @@
     </script>
     <div id="abc">233</div>
     <script>
+        const wasmBrowserInstantiate = async (
+            wasmModuleUrl,
+            importObject
+        ) => {
+            let response = undefined;
+            if (!importObject) {
+                importObject = {
+                    env: {
+                        abort: () => console.log("Abort!")
+                    }
+                };
+            }
+            if (WebAssembly.instantiateStreaming) {
+                response = await WebAssembly.instantiateStreaming(
+                    fetch(wasmModuleUrl),
+                    importObject
+                );
+            } else {
+                const fetchAndInstantiateTask = async () => {
+                    const wasmArrayBuffer = await fetch(wasmModuleUrl).then(
+                        response => response.arrayBuffer()
+                    );
+                    return WebAssembly.instantiate(
+                        wasmArrayBuffer,
+                        importObject
+                    );
+                };
+                response = await fetchAndInstantiateTask();
+            }
+            return response;
+        };
+
         const runWasmAdd = async () => {
-            const wasmModule = await loader.instantiateStreaming(
-                fetch("./build/optimized.wasm"),
+            const wasmModule = await wasmBrowserInstantiate(
+                "build/optimized.wasm",
                 {
                     index: {
                         consoleLog: value =>
@@ -42,13 +74,13 @@
                         }
                     }
                 }
-            )
-            console.log(wasmModule);
+            );
             const {
                 add,
                 standardizeCellsWithMergeCells,
                 memory,
                 setRes,
+                foo
                 // calculateMoveThresholds
             } = wasmModule.instance.exports;
             console.log(wasmModule.instance.exports);
@@ -68,7 +100,7 @@
 
             // JavaScript
             const { concat } = wasmModule.instance.exports
-            const { __allocString, __getString, __retain, __release } = wasmModule.exports
+            const { __allocString, __getString, __retain, __release } = wasmModule.instance.exports
 
             function doConcat(aStr, bStr) {
                 let aPtr = __retain(__allocString(aStr))
@@ -82,45 +114,6 @@
             }
 
             console.log(doConcat("Hello ", "world!"))
-
-
-
-            const { sum, Int32Array_ID } = wasmModule.exports
-            const { __allocArray } = wasmModule.exports
-
-            function doSum(values) {
-                const arrPtr = __retain(__allocArray(Int32Array_ID, values))
-                const value = sum(arrPtr)
-                __release(arrPtr)
-                return value
-            }
-
-            console.log(doSum([1, 2, 3]))
-
-
-            // JavaScript
-            const { getRandomArray } = wasmModule.exports
-            const { __getArray } = wasmModule.exports
-
-            function doGetRandomArray(len) {
-                const arrPtr = getRandomArray(len)
-                const values = __getArray(arrPtr)
-                __release(arrPtr)
-                return values
-            }
-
-            console.log(doGetRandomArray(10))
-
-
-            // JavaScript
-            const { Foo, getFoo } = wasmModule.exports
-
-            const fooPtr = getFoo()
-            const foo = Foo.wrap(fooPtr)
-            const strPtr = foo.getString()
-            console.log(__getString(strPtr))
-            __release(strPtr)
-            __release(fooPtr)
 
         };
         runWasmAdd();
