@@ -1,7 +1,0 @@
-*.pem
-build
-.idea
-node_modules
-*-bundle.js
-.cache
-dist

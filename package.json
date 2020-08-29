@@ -1,19 +1,31 @@
 {
-  "name": "assemblyscript-demo",
-  "version": "0.1.0",
-  "description": "AssemblyScript demo",
+  "name": "assemblyscript-tutorial",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "repository": "github:dguo/assemblyscript-demo",
   "scripts": {
-    "start": "static-server"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "asbuild:untouched": "asc assembly/index.ts --target debug",
+    "asbuild:optimized": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "build": "npm run asbuild",
+    "start": "static-server && npm run build"
   },
-  "author": {
-    "name": "Danny Guo",
-    "email": "danny@dannyguo.com",
-    "url": "https://dannyguo.com"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wscats/assemblyscript-tutorial.git"
   },
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wscats/assemblyscript-tutorial/issues"
+  },
+  "homepage": "https://github.com/Wscats/assemblyscript-tutorial#readme",
+  "dependencies": {
+    "@assemblyscript/loader": "^0.14.9"
+  },
   "devDependencies": {
+    "assemblyscript": "^0.14.9",
     "static-server": "^2.2.1"
   }
 }
