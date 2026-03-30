@@ -21,8 +21,8 @@ export function read_wasm_memory_buffer_and_return_index_one(): number;
  *
  * @param {RequestInfo | BufferSource | WebAssembly.Module} module_or_path
  *
- * @returns {Promise<any>}
+ * @returns {Promise<unknown>}
  */
 export default function init(
     module_or_path: RequestInfo | BufferSource | WebAssembly.Module
-): Promise<any>;
+): Promise<unknown>;

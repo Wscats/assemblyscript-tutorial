@@ -1,3 +1,5 @@
+'use strict';
+
 // Set up a console element in the dom
 const consoleElement = document.createElement("pre");
 consoleElement.style = `border: 1px solid black`;

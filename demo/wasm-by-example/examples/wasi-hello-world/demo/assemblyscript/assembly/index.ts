@@ -22,7 +22,7 @@ let fileOrNull: Descriptor | null = FileSystem.open(filePath, "w+");
 // If fileOrNull is null, that means we could not create/open the file
 // (Probably because we did not add the `--dir` flag)
 // Throw an error.
-if (fileOrNull == null) {
+if (fileOrNull === null) {
     throw new Error("Could not open the file " + filePath);
 }
 

@@ -8,7 +8,10 @@
     "start": "static-server",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
     "test": "jest --coverage",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "lint:check": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "author": {
     "name": "Danny Guo",
@@ -21,5 +24,13 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "keywords": [
+    "assemblyscript",
+    "tutorial"
+  ],
+  "bugs": {
+    "url": "https://github.com/wscats/assemblyscript-tutorial/issues"
+  },
+  "homepage": "https://github.com/wscats/assemblyscript-tutorial#readme"
 }

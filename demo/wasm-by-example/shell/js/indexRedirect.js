@@ -1,3 +1,5 @@
+'use strict';
+
 // Initialization IIFE
 (() => {
     let readingLanguage = window.WASM_BY_EXAMPLE.readingLanguage;

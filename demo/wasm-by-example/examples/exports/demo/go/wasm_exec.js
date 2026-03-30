@@ -1,3 +1,5 @@
+'use strict';
+
 // Copyright 2018 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -54,7 +56,7 @@
             writeSync(fd, buf) {
                 outputBuf += decoder.decode(buf);
                 const nl = outputBuf.lastIndexOf("\n");
-                if (nl != -1) {
+                if (nl !== -1) {
                     console.log(outputBuf.substr(0, nl));
                     outputBuf = outputBuf.substr(nl + 1);
                 }
@@ -205,7 +207,7 @@
 
     const encoder = new TextEncoder("utf-8");
     const decoder = new TextDecoder("utf-8");
-    var logLine = [];
+    let logLine = [];
 
     global.Go = class {
         constructor() {
@@ -332,17 +334,17 @@
                     // https://github.com/bytecodealliance/wasmtime/blob/master/docs/WASI-api.md#__wasi_fd_write
                     fd_write: function(fd, iovs_ptr, iovs_len, nwritten_ptr) {
                         let nwritten = 0;
-                        if (fd == 1) {
+                        if (fd === 1) {
                             for (let iovs_i = 0; iovs_i < iovs_len; iovs_i++) {
                                 let iov_ptr = iovs_ptr + iovs_i * 8; // assuming wasm32
                                 let ptr = mem().getUint32(iov_ptr + 0, true);
                                 let len = mem().getUint32(iov_ptr + 4, true);
                                 for (let i = 0; i < len; i++) {
                                     let c = mem().getUint8(ptr + i);
-                                    if (c == 13) {
+                                    if (c === 13) {
                                         // CR
                                         // ignore
-                                    } else if (c == 10) {
+                                    } else if (c === 10) {
                                         // LF
                                         // write line
                                         let line = decoder.decode(
@@ -642,7 +644,7 @@
         global.process.versions &&
         !global.process.versions.electron
     ) {
-        if (process.argv.length != 3) {
+        if (process.argv.length !== 3) {
             console.error("usage: go_js_wasm_exec [wasm binary] [arguments]");
             process.exit(1);
         }

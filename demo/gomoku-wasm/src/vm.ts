@@ -33,7 +33,7 @@ class ASModuleWrapper {
     }
 
     protected getString = (value: number) => {
-        if (this.module == null) {
+        if (this.module === null) {
             return value;
         } else {
             return this.module.getString(value);
@@ -41,7 +41,7 @@ class ASModuleWrapper {
     };
 
     protected getArray = (type: TypedArrayConstructor, value: number) => {
-        if (this.module == null) {
+        if (this.module === null) {
             return value;
         } else {
             return this.module.getArray(type, value);

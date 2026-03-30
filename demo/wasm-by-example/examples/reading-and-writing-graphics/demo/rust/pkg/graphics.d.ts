@@ -27,8 +27,8 @@ export function generate_checker_board(
  *
  * @param {RequestInfo | BufferSource | WebAssembly.Module} module_or_path
  *
- * @returns {Promise<any>}
+ * @returns {Promise<unknown>}
  */
 export default function init(
     module_or_path: RequestInfo | BufferSource | WebAssembly.Module
-): Promise<any>;
+): Promise<unknown>;

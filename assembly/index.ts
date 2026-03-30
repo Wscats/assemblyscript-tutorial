@@ -5,11 +5,11 @@
 // }
 
 // declare global {
-//     interface Window { MyNamespace: any; }
+//     interface Window { MyNamespace: unknown; }
 // }
 
 export function _f(x: number): number {
-    if (x == 1 || x == 2) {
+    if (x === 1 || x === 2) {
         return 1;
     }
     return _f(x - 1) + _f(x - 2);
@@ -56,7 +56,7 @@ export const Int32Array_ID = idof<Int32Array>();
 // import { add } from './tool.ts';
 
 // export function _f(x: number): number {
-//     if (x == 1 || x == 2) {
+//     if (x === 1 || x === 2) {
 //         return 1;
 //     }
 //     return _f(x - 1) + _f(x - 2)

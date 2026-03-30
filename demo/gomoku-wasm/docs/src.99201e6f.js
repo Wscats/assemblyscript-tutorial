@@ -1,22 +1,22 @@
 parcelRequire = (function(e, r, t, n) {
     var i,
-        o = "function" == typeof parcelRequire && parcelRequire,
-        u = "function" == typeof require && require;
+        o = "function" === typeof parcelRequire && parcelRequire,
+        u = "function" === typeof require && require;
     function f(t, n) {
         if (!r[t]) {
             if (!e[t]) {
-                var i = "function" == typeof parcelRequire && parcelRequire;
+                let i = "function" === typeof parcelRequire && parcelRequire;
                 if (!n && i) return i(t, !0);
                 if (o) return o(t, !0);
-                if (u && "string" == typeof t) return u(t);
-                var c = new Error("Cannot find module '" + t + "'");
+                if (u && "string" === typeof t) return u(t);
+                let c = new Error("Cannot find module '" + t + "'");
                 throw ((c.code = "MODULE_NOT_FOUND"), c);
             }
             (p.resolve = function(r) {
                 return e[t][1][r] || r;
             }),
                 (p.cache = {});
-            var l = (r[t] = new f.Module(t));
+            let l = (r[t] = new f.Module(t));
             e[t][0].call(l.exports, p, l, l.exports, this);
         }
         return r[t].exports;
@@ -39,17 +39,17 @@ parcelRequire = (function(e, r, t, n) {
                 {}
             ];
         });
-    for (var c = 0; c < t.length; c++)
+    for (let c = 0; c < t.length; c++)
         try {
             f(t[c]);
         } catch (e) {
             i || (i = e);
         }
     if (t.length) {
-        var l = f(t[t.length - 1]);
-        "object" == typeof exports && "undefined" != typeof module
+        let l = f(t[t.length - 1]);
+        "object" === typeof exports && "undefined" !== typeof module
             ? (module.exports = l)
-            : "function" == typeof define && define.amd
+            : "function" === typeof define && define.amd
             ? define(function() {
                   return l;
               })
@@ -62,10 +62,10 @@ parcelRequire = (function(e, r, t, n) {
         yyvA: [
             function(require, module, exports) {
                 "use strict";
-                const t = "undefined" != typeof BigUint64Array,
+                const t = "undefined" !== typeof BigUint64Array,
                     e = Symbol();
                 function r(t, e, r) {
-                    var n = (r + 4) >>> 1,
+                    let n = (r + 4) >>> 1,
                         o = t[r >>> 2],
                         i = [];
                     for (; o > 1024; ) {
@@ -80,18 +80,18 @@ parcelRequire = (function(e, r, t, n) {
                     );
                 }
                 function n(t) {
-                    var e = {};
+                    let e = {};
                     function n(t, e) {
                         if (!t) return "<yet unknown>";
-                        var n = t.buffer;
+                        let n = t.buffer;
                         return r(new Uint32Array(n), new Uint16Array(n), e);
                     }
-                    var o = (t.env = t.env || {});
+                    let o = (t.env = t.env || {});
                     return (
                         (o.abort =
                             o.abort ||
                             function(t, r, i, a) {
-                                var u = e.memory || o.memory;
+                                let u = e.memory || o.memory;
                                 throw Error(
                                     "abort: " +
                                         n(u, t) +
@@ -106,7 +106,7 @@ parcelRequire = (function(e, r, t, n) {
                         (o.trace =
                             o.trace ||
                             function(t, r) {
-                                var i = e.memory || o.memory;
+                                let i = e.memory || o.memory;
                                 console.log(
                                     "trace: " +
                                         n(i, t) +
@@ -158,7 +158,7 @@ parcelRequire = (function(e, r, t, n) {
                     return (
                         j(),
                         (e.newString = function(t) {
-                            var e = t.length,
+                            let e = t.length,
                                 r = v(4 + (e << 1)),
                                 n = (4 + r) >>> 1;
                             j(), (y[r >>> 2] = e);
@@ -170,13 +170,13 @@ parcelRequire = (function(e, r, t, n) {
                             return j(), r(y, s, t);
                         }),
                         (e.newArray = function(t, e, r) {
-                            var n = t.constructor;
+                            let n = t.constructor;
                             n === Function
                                 ? ((n = t), (t = null))
                                 : void 0 === e && (e = t.length);
-                            var i = n.BYTES_PER_ELEMENT;
+                            let i = n.BYTES_PER_ELEMENT;
                             if (!i) throw Error("not a typed array");
-                            var a = i * e,
+                            let a = i * e,
                                 u = v(12),
                                 c = v(
                                     (function(t) {
@@ -205,22 +205,22 @@ parcelRequire = (function(e, r, t, n) {
                             return u;
                         }),
                         (e.getArray = function(t, e) {
-                            var r = t.BYTES_PER_ELEMENT;
+                            let r = t.BYTES_PER_ELEMENT;
                             if (!r) throw Error("not a typed array");
                             j();
-                            var n = y[e >>> 2],
+                            let n = y[e >>> 2],
                                 i = y[(e + 4) >>> 2],
                                 a = y[(e + 8) >>> 2];
                             return new t(o, n + 8 + i, (a - i) / r);
                         }),
                         (e.freeArray = function(t) {
                             j();
-                            var e = y[t >>> 2];
+                            let e = y[t >>> 2];
                             d(e), d(t);
                         }),
                         (e.newFunction = function(t) {
-                            "function" == typeof t.original && (t = t.original);
-                            var e = E.length;
+                            "function" === typeof t.original && (t = t.original);
+                            let e = E.length;
                             return E.grow(1), E.set(e, t), e;
                         }),
                         (e.getFunction = function(t) {
@@ -286,7 +286,7 @@ parcelRequire = (function(e, r, t, n) {
                     );
                 }
                 function i(t, e) {
-                    var r = (...r) => (e(r.length), t(...r));
+                    let r = (...r) => (e(r.length), t(...r));
                     return (r.original = t), r;
                 }
                 function a(t, e) {
@@ -302,7 +302,7 @@ parcelRequire = (function(e, r, t, n) {
                     );
                 }
                 function f(t, r) {
-                    var n = r ? Object.create(r) : {},
+                    let n = r ? Object.create(r) : {},
                         o = t._setargc || function() {};
                     function a(t, e) {
                         return Object.prototype.hasOwnProperty.call(t, e);
@@ -383,7 +383,7 @@ parcelRequire = (function(e, r, t, n) {
                                       set: t[u.replace("get:", "set:")],
                                       enumerable: !0
                                   })
-                                : (f[s] = "function" == typeof r ? i(r, o) : r);
+                                : (f[s] = "function" === typeof r ? i(r, o) : r);
                     }
                     return n;
                 }
@@ -563,7 +563,7 @@ parcelRequire = (function(e, r, t, n) {
         tk1t: [
             function(require, module, exports) {
                 "use strict";
-                var t =
+                let t =
                         (this && this.__awaiter) ||
                         function(t, e, a, i) {
                             return new (a || (a = Promise))(function(s, r) {
@@ -609,7 +609,7 @@ parcelRequire = (function(e, r, t, n) {
                                 };
                             return (
                                 (r = { next: o(0), throw: o(1), return: o(2) }),
-                                "function" == typeof Symbol &&
+                                "function" === typeof Symbol &&
                                     (r[Symbol.iterator] = function() {
                                         return this;
                                     }),
@@ -732,7 +732,7 @@ parcelRequire = (function(e, r, t, n) {
                             }
                         };
                 Object.defineProperty(exports, "__esModule", { value: !0 });
-                var a = require("assemblyscript/lib/loader"),
+                let a = require("assemblyscript/lib/loader"),
                     i = require("../shared/CanvasPatternRepetition"),
                     s = require("../shared/FillRule"),
                     r = require("../shared/ImageSmoothingQuality"),
@@ -902,10 +902,10 @@ parcelRequire = (function(e, r, t, n) {
                                 );
                             }),
                             (p.prototype.loadImage = function(t, e) {
-                                var a = this,
+                                let a = this,
                                     i = this.wasm.getString(e);
                                 this.id += 1;
-                                var s = this.id;
+                                let s = this.id;
                                 return (
                                     (this.wasm.loading[s] = fetch(i)
                                         .then(function(t) {
@@ -953,7 +953,7 @@ parcelRequire = (function(e, r, t, n) {
                                 if (!this.wasm.contexts[t])
                                     throw new Error("Cannot find canvas: " + t);
                                 for (
-                                    var a = this.wasm,
+                                    let a = this.wasm,
                                         i = a.contexts[t],
                                         u = new Float64Array(
                                             a.memory.buffer,
@@ -1349,7 +1349,7 @@ parcelRequire = (function(e, r, t, n) {
                         exports.hasOwnProperty(r) || (exports[r] = e[r]);
                 }
                 Object.defineProperty(exports, "__esModule", { value: !0 });
-                var r = require("./glue/AS2DGlue");
+                let r = require("./glue/AS2DGlue");
                 function i(e, i) {
                     return (
                         void 0 === i && (i = {}),
@@ -1402,10 +1402,10 @@ parcelRequire = (function(e, r, t, n) {
         "F+7o": [
             function(require, module, exports) {
                 "use strict";
-                var t =
+                let t =
                         (this && this.__extends) ||
                         (function() {
-                            var t = function(n, e) {
+                            let t = function(n, e) {
                                 return (t =
                                     Object.setPrototypeOf ||
                                     ({ __proto__: [] } instanceof Array &&
@@ -1476,7 +1476,7 @@ parcelRequire = (function(e, r, t, n) {
                                 };
                             return (
                                 (i = { next: u(0), throw: u(1), return: u(2) }),
-                                "function" == typeof Symbol &&
+                                "function" === typeof Symbol &&
                                     (i[Symbol.iterator] = function() {
                                         return this;
                                     }),
@@ -1602,8 +1602,8 @@ parcelRequire = (function(e, r, t, n) {
                         (this && this.__importStar) ||
                         function(t) {
                             if (t && t.__esModule) return t;
-                            var n = {};
-                            if (null != t)
+                            let n = {};
+                            if (null !== t)
                                 for (var e in t)
                                     Object.hasOwnProperty.call(t, e) &&
                                         (n[e] = t[e]);
@@ -1633,15 +1633,15 @@ parcelRequire = (function(e, r, t, n) {
                     },
                     c = (function() {
                         function t() {
-                            var t = this;
+                            let t = this;
                             (this.module = null),
                                 (this.getString = function(n) {
-                                    return null == t.module
+                                    return null === t.module
                                         ? n
                                         : t.module.getString(n);
                                 }),
                                 (this.getArray = function(n, e) {
-                                    return null == t.module
+                                    return null === t.module
                                         ? e
                                         : t.module.getArray(n, e);
                                 });
@@ -1655,7 +1655,7 @@ parcelRequire = (function(e, r, t, n) {
                     })(),
                     s = (function(n) {
                         function e() {
-                            var t =
+                            let t =
                                 (null !== n && n.apply(this, arguments)) ||
                                 this;
                             return (
@@ -1685,7 +1685,7 @@ parcelRequire = (function(e, r, t, n) {
                     })(c),
                     f = (function(n) {
                         function e() {
-                            var t =
+                            let t =
                                 (null !== n && n.apply(this, arguments)) ||
                                 this;
                             return (
@@ -1734,13 +1734,13 @@ parcelRequire = (function(e, r, t, n) {
                                         console: g,
                                         engine: {
                                             update: function(t, n) {
-                                                var r = e.newArray(
+                                                let r = e.newArray(
                                                     o.getArray(Int8Array, n)
                                                 );
                                                 return e.update(t, r);
                                             },
                                             loadState: function(t) {
-                                                var n = o.getArray(
+                                                let n = o.getArray(
                                                     Int8Array,
                                                     t
                                                 );
@@ -1748,7 +1748,7 @@ parcelRequire = (function(e, r, t, n) {
                                                     "engine adapter loadState",
                                                     n
                                                 );
-                                                var r = e.newArray(n);
+                                                let r = e.newArray(n);
                                                 e.loadState(r);
                                             },
                                             getState: function() {
@@ -1766,14 +1766,14 @@ parcelRequire = (function(e, r, t, n) {
                                     })
                                     .then(function(e) {
                                         (o = e), g.init(e);
-                                        var i = document
+                                        let i = document
                                             .querySelector("#as2d")
                                             .getContext("2d");
                                         return (
                                             i.canvas.addEventListener(
                                                 "click",
                                                 function(t) {
-                                                    var r = t.target.getBoundingClientRect(),
+                                                    let r = t.target.getBoundingClientRect(),
                                                         o = e.onClick(
                                                             t.clientX - r.left,
                                                             t.clientY - r.top
@@ -1819,29 +1819,29 @@ parcelRequire = (function(e, r, t, n) {
         "9B6d": [
             function(require, module, exports) {
                 "use strict";
-                var e =
+                const e =
                     (this && this.__importStar) ||
                     function(e) {
                         if (e && e.__esModule) return e;
-                        var t = {};
-                        if (null != e)
+                        let t = {};
+                        if (null !== e)
                             for (var r in e)
                                 Object.hasOwnProperty.call(e, r) &&
                                     (t[r] = e[r]);
                         return (t.default = e), t;
                     };
                 Object.defineProperty(exports, "__esModule", { value: !0 });
-                var t = e(require("./vm")),
+                let t = e(require("./vm")),
                     r = "gomoku",
                     o = {};
                 t.init(
                     1,
                     function(e, t) {
                         console.log("state update", e);
-                        var a = t.getState(),
+                        let a = t.getState(),
                             l = t.getArray(Int8Array, a);
                         o = { state: Array.from(l) };
-                        var n = JSON.stringify(o);
+                        const n = JSON.stringify(o);
                         localStorage.setItem(r, n),
                             console.log("update storage value", n);
                     },
@@ -1856,14 +1856,14 @@ parcelRequire = (function(e, r, t, n) {
                     !0
                 ).then(function(e) {
                     try {
-                        var t = localStorage.getItem(r);
-                        if (null != t) {
+                        const t = localStorage.getItem(r);
+                        if (null !== t) {
                             console.log("storage value", t);
-                            var o = JSON.parse(t);
+                            const o = JSON.parse(t);
                             console.log("stateObject", o);
-                            var a = Int8Array.from(o.state);
+                            const a = Int8Array.from(o.state);
                             console.log("typedArray length", a.length);
-                            var l = e.newArray(a);
+                            const l = e.newArray(a);
                             e.loadState(l);
                         }
                     } catch (n) {

@@ -1,3 +1,5 @@
+'use strict';
+
 // I'm using node for this example
 const { AsBind } = require("as-bind");
 const fs = require("fs");

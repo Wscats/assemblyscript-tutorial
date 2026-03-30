@@ -6,7 +6,7 @@ class Position {
     constructor(public row: i32, public col: i32) {}
 
     static fromState(state: Int8Array): Position {
-        if (state.length != 2) {
+        if (state.length !== 2) {
             throw ERROR("Invalid state");
         }
         return new Position(state[0], state[1]);
@@ -49,7 +49,7 @@ class Chessboard {
 
     hasChess(row: i32, col: i32): boolean {
         return constants.validRowAndCol(row, col)
-            ? this.get(row, col) != Chess.None
+            ? this.get(row, col) !== Chess.None
             : false;
     }
 
@@ -85,14 +85,14 @@ class Chessboard {
     // @ts-ignore
     @inline
     isFull(): boolean {
-        return this.findEmptyPosition() == null;
+        return this.findEmptyPosition() === null;
     }
 
     // @ts-ignore
     @inline
     isEmpty(): boolean {
         for (let i = 0, len = this.board.length; i < len; i++) {
-            if (this.board[i] != Chess.None) {
+            if (this.board[i] !== Chess.None) {
                 return false;
             }
         }
@@ -108,7 +108,7 @@ class Chessboard {
     findPosition(chess: Chess): Position | null {
         let position: Position | null = null;
         for (let i = 0, len = this.board.length; i < len; i++) {
-            if (this.board[i] == chess) {
+            if (this.board[i] === chess) {
                 position = Position.fromIndex(i);
                 break;
             }
@@ -118,7 +118,7 @@ class Chessboard {
 
     load(fullState: Int8Array): void {
         let len = this.board.length;
-        assert(len == fullState.length);
+        assert(len === fullState.length);
         for (let i = 0; i < len; i++) {
             this.board[i] = fullState[i];
         }
@@ -128,13 +128,13 @@ class Chessboard {
         let chessDiff = 0;
         for (let i = 0, len = this.board.length; i < len; i++) {
             let value = this.board[i];
-            if (value == Chess.Black) {
+            if (value === Chess.Black) {
                 chessDiff = chessDiff - 1;
-            } else if (value == Chess.White) {
+            } else if (value === Chess.White) {
                 chessDiff = chessDiff + 1;
             }
         }
-        if (chessDiff == 0) {
+        if (chessDiff === 0) {
             return PlayerRole.First;
         } else if (chessDiff > 0) {
             return PlayerRole.Second;
@@ -167,11 +167,11 @@ class GomokuEngine extends GameEngine {
             return false;
         }
         console.logAction("GomokuEngine update", player, state);
-        if (state.length != 2) {
+        if (state.length !== 2) {
             // console.log("Invalid state");
             return false;
         }
-        if (this.currentPlayer != player) {
+        if (this.currentPlayer !== player) {
             // console.log("Not your turn.")
             return false;
         }
@@ -263,11 +263,11 @@ class GomokuEngine extends GameEngine {
         let count = 0;
         for (let col = 0, dim = constants.boardDimension; col < dim; col++) {
             if (
-                this.chessboard.getChess(row, col) ==
+                this.chessboard.getChess(row, col) ===
                 constants.chessOfPlayer(forPlayer)
             ) {
                 count = count + 1;
-                if (count == 5) {
+                if (count === 5) {
                     // console.log("checkRow gameIsOver")
                     return true;
                 }
@@ -282,11 +282,11 @@ class GomokuEngine extends GameEngine {
         let count = 0;
         for (let row = 0, dim = constants.boardDimension; row <= dim; row++) {
             if (
-                this.chessboard.getChess(row, col) ==
+                this.chessboard.getChess(row, col) ===
                 constants.chessOfPlayer(forPlayer)
             ) {
                 count = count + 1;
-                if (count == 5) {
+                if (count === 5) {
                     // console.log("checkColumn gameIsOver")
                     return true;
                 }
@@ -317,11 +317,11 @@ class GomokuEngine extends GameEngine {
         }
         while (fromR <= toR && fromC <= toC) {
             if (
-                this.chessboard.getChess(fromR, fromC) ==
+                this.chessboard.getChess(fromR, fromC) ===
                 constants.chessOfPlayer(forPlayer)
             ) {
                 count = count + 1;
-                if (count == 5) {
+                if (count === 5) {
                     // console.log("checkMainDiagonal gameIsOver")
                     return true;
                 }
@@ -355,11 +355,11 @@ class GomokuEngine extends GameEngine {
         let chessboard = this.chessboard;
         while (fromR <= toR && fromC >= toC) {
             if (
-                chessboard.getChess(fromR, fromC) ==
+                chessboard.getChess(fromR, fromC) ===
                 constants.chessOfPlayer(forPlayer)
             ) {
                 count = count + 1;
-                if (count == 5) {
+                if (count === 5) {
                     // console.log("checkSubDiagonal gameIsOver")
                     return true;
                 }

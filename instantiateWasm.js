@@ -1,3 +1,5 @@
+'use strict';
+
 const wasmBrowserInstantiate = async (wasmModuleUrl, importObject) => {
     let response = undefined;
     if (!importObject) {

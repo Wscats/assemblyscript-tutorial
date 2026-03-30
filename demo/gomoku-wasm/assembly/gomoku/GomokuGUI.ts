@@ -11,9 +11,9 @@ let EmptyState = new Int8Array(0);
 // @ts-ignore
 @inline
 function chessOfColor(chess: Chess): string {
-    if (chess == Chess.Black) {
+    if (chess === Chess.Black) {
         return Black;
-    } else if (chess == Chess.White) {
+    } else if (chess === Chess.White) {
         return White;
     } else {
         return "none";
@@ -51,7 +51,7 @@ class GomokuGUI extends GameGUI {
         this.draw();
         for (let i = 0, len = fullState.length; i < len; i++) {
             let value = fullState[i];
-            if (value != Chess.None) {
+            if (value !== Chess.None) {
                 let position = Position.fromIndex(i);
                 this.drawChess(position.row, position.col, value);
             }
@@ -104,7 +104,7 @@ class GomokuGUI extends GameGUI {
     }
 
     drawChess(row: i32, col: i32, chess: Chess): void {
-        if (chess == Chess.None) {
+        if (chess === Chess.None) {
             return;
         }
         let color = chessOfColor(chess);

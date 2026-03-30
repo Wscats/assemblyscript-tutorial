@@ -1,3 +1,5 @@
+'use strict';
+
 const __exports = {};
 let wasm;
 

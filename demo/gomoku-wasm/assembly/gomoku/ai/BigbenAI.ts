@@ -90,12 +90,12 @@ export class BigbenAI extends GamePlayer {
 
     startGame(): void {
         if (this.chessboard.isEmpty()) {
-            if (this.role == PlayerRole.First) {
+            if (this.role === PlayerRole.First) {
                 this.first();
             }
         } else {
             let nextPlayer = this.chessboard.nextPlayer();
-            if (nextPlayer == this.role) {
+            if (nextPlayer === this.role) {
                 this.nextAction();
             }
         }
@@ -134,7 +134,7 @@ export class BigbenAI extends GamePlayer {
         );
         for (let i = 0; i < constants.boardDimension; i++)
             for (let j = 0; j < constants.boardDimension; j++)
-                if (this.chessboard.get(i, j) == Chess.None) {
+                if (this.chessboard.get(i, j) === Chess.None) {
                     this.chessboard.put(i, j, this.rivalChess); //尝试落子
                     rivalScores[idxByRowCol(i, j)] = this.computeScore(
                         i,
@@ -164,7 +164,7 @@ export class BigbenAI extends GamePlayer {
         );
         for (let i = 0; i < constants.boardDimension; i++)
             for (let j = 0; j < constants.boardDimension; j++)
-                if (this.chessboard.get(i, j) == 0) {
+                if (this.chessboard.get(i, j) === 0) {
                     this.chessboard.put(i, j, this.myChess); //尝试落子
                     scores[idxByRowCol(i, j)] = this.computeScore(
                         i,
@@ -183,7 +183,7 @@ export class BigbenAI extends GamePlayer {
                     J = j;
                 }
 
-        if (scores[idxByRowCol(I, J)] == 100) {
+        if (scores[idxByRowCol(I, J)] === 100) {
             //直接获胜
             newPosition = new Position(I, J);
             // console.logi("Attack: (" + newPosition.toString() + ") s:", scores[idxByRowCol(I, J)]);
@@ -221,7 +221,7 @@ export class BigbenAI extends GamePlayer {
                             ? position.col + (position.col - col)
                             : position.col - (col - position.col);
                     if (
-                        this.chessboard.getChess(oppositeRow, oppositeCol) ==
+                        this.chessboard.getChess(oppositeRow, oppositeCol) ===
                         this.rivalChess
                     ) {
                         // console.log("return best position:" + oppositeRow.toString() + ":" + oppositeCol.toString());
@@ -244,7 +244,7 @@ export class BigbenAI extends GamePlayer {
      * 一个棋型由其中连子的个数和前后是否堵截来确定
      */
     private scoreOfStyle(line: i32, block1: boolean, block2: boolean): i32 {
-        if (line == 5) return AIScore.ooooo;
+        if (line === 5) return AIScore.ooooo;
         if (block1 && block2) return 0;
         switch (line) {
             case 4:
@@ -268,7 +268,7 @@ export class BigbenAI extends GamePlayer {
         block1: boolean,
         block2: boolean
     ): i32 {
-        if (line == 5) return AIRivalScore.ooooo;
+        if (line === 5) return AIRivalScore.ooooo;
         if (block1 && block2) return 0;
         switch (line) {
             case 4:
@@ -293,38 +293,38 @@ export class BigbenAI extends GamePlayer {
         let r1 = row,
             c = col;
         let chessboard = this.chessboard;
-        while (r1 > 0 && chessboard.get(r1 - 1, c) == playerChess) r1--;
+        while (r1 > 0 && chessboard.get(r1 - 1, c) === playerChess) r1--;
         let upIsBlocked =
-            r1 == 0 ||
-            chessboard.get(r1 - 1, c) == constants.rival(playerChess);
+            r1 === 0 ||
+            chessboard.get(r1 - 1, c) === constants.rival(playerChess);
         let r2 = row;
-        while (r2 < 14 && chessboard.get(r2 + 1, c) == playerChess) r2++;
+        while (r2 < 14 && chessboard.get(r2 + 1, c) === playerChess) r2++;
         let downIsBlocked =
-            r2 == 14 ||
-            chessboard.get(r2 + 1, c) == constants.rival(playerChess);
-        let line = r1 == r2 ? 1 : r2 - r1 + 1;
+            r2 === 14 ||
+            chessboard.get(r2 + 1, c) === constants.rival(playerChess);
+        let line = r1 === r2 ? 1 : r2 - r1 + 1;
         // 判断棋型
         score +=
-            playerChess == this.myChess
+            playerChess === this.myChess
                 ? this.scoreOfStyle(line, upIsBlocked, downIsBlocked)
                 : this.scoreOfRivalStyle(line, upIsBlocked, downIsBlocked);
 
         //左、右 (r不变, c先减后加)
         let r = row,
             c1 = col;
-        while (c1 > 0 && chessboard.get(r, c1 - 1) == playerChess) c1--;
+        while (c1 > 0 && chessboard.get(r, c1 - 1) === playerChess) c1--;
         let leftIsBlocked =
-            c1 == 0 ||
-            chessboard.get(r, c1 - 1) == constants.rival(playerChess);
+            c1 === 0 ||
+            chessboard.get(r, c1 - 1) === constants.rival(playerChess);
         let c2 = col;
-        while (c2 < 14 && chessboard.get(r, c2 + 1) == playerChess) c2++;
+        while (c2 < 14 && chessboard.get(r, c2 + 1) === playerChess) c2++;
         let rightIsBlocked =
-            c2 == 14 ||
-            chessboard.get(r, c2 + 1) == constants.rival(playerChess);
-        line = c1 == c2 ? 1 : c2 - c1 + 1;
+            c2 === 14 ||
+            chessboard.get(r, c2 + 1) === constants.rival(playerChess);
+        line = c1 === c2 ? 1 : c2 - c1 + 1;
         // 判断棋型
         score +=
-            playerChess == this.myChess
+            playerChess === this.myChess
                 ? this.scoreOfStyle(line, leftIsBlocked, rightIsBlocked)
                 : this.scoreOfRivalStyle(line, leftIsBlocked, rightIsBlocked);
 
@@ -333,33 +333,33 @@ export class BigbenAI extends GamePlayer {
         while (
             r1 > 0 &&
             c1 > 0 &&
-            chessboard.get(r1 - 1, c1 - 1) == playerChess
+            chessboard.get(r1 - 1, c1 - 1) === playerChess
         ) {
             r1--;
             c1--;
         }
         let leftUpIsBlocked =
-            r1 == 0 ||
-            c1 == 0 ||
-            chessboard.get(r1 - 1, c1 - 1) == constants.rival(playerChess);
+            r1 === 0 ||
+            c1 === 0 ||
+            chessboard.get(r1 - 1, c1 - 1) === constants.rival(playerChess);
         r2 = row;
         c2 = col;
         while (
             r2 < 14 &&
             c2 < 14 &&
-            chessboard.get(r2 + 1, c2 + 1) == playerChess
+            chessboard.get(r2 + 1, c2 + 1) === playerChess
         ) {
             r2++;
             c2++;
         }
         let rightDownIsBlocked =
-            r2 == 14 ||
-            c2 == 14 ||
-            chessboard.get(r2 + 1, c2 + 1) == constants.rival(playerChess);
-        line = r1 == r2 ? 1 : r2 - r1 + 1;
+            r2 === 14 ||
+            c2 === 14 ||
+            chessboard.get(r2 + 1, c2 + 1) === constants.rival(playerChess);
+        line = r1 === r2 ? 1 : r2 - r1 + 1;
         // 判断棋型
         score +=
-            playerChess == 1
+            playerChess === 1
                 ? this.scoreOfStyle(line, leftUpIsBlocked, rightDownIsBlocked)
                 : this.scoreOfRivalStyle(
                       line,
@@ -372,33 +372,33 @@ export class BigbenAI extends GamePlayer {
         while (
             r1 < 14 &&
             c1 > 0 &&
-            chessboard.get(r1 + 1, c1 - 1) == playerChess
+            chessboard.get(r1 + 1, c1 - 1) === playerChess
         ) {
             r1++;
             c1--;
         }
         let leftDownIsBlocked =
-            r1 == 14 ||
-            c1 == 0 ||
-            chessboard.get(r1 + 1, c1 - 1) == constants.rival(playerChess);
+            r1 === 14 ||
+            c1 === 0 ||
+            chessboard.get(r1 + 1, c1 - 1) === constants.rival(playerChess);
         r2 = row;
         c2 = col;
         while (
             r2 > 0 &&
             c2 < 14 &&
-            chessboard.get(r2 - 1, c2 + 1) == playerChess
+            chessboard.get(r2 - 1, c2 + 1) === playerChess
         ) {
             r2--;
             c2++;
         }
         let rightUpIsBlocked =
-            r2 == 0 ||
-            c2 == 14 ||
-            chessboard.get(r2 - 1, c2 + 1) == constants.rival(playerChess);
-        line = c1 == c2 ? 1 : c2 - c1 + 1;
+            r2 === 0 ||
+            c2 === 14 ||
+            chessboard.get(r2 - 1, c2 + 1) === constants.rival(playerChess);
+        line = c1 === c2 ? 1 : c2 - c1 + 1;
         // 判断棋型
         score +=
-            playerChess == 1
+            playerChess === 1
                 ? this.scoreOfStyle(line, leftDownIsBlocked, rightUpIsBlocked)
                 : this.scoreOfRivalStyle(
                       line,

@@ -1,3 +1,5 @@
+'use strict';
+
 // const WASM_BY_EXAMPLE_VERSION, and const WASM_BY_EXAMPLE_EXAMPLES_BY_LANGUAGE
 // added by the build system. So imagine there is a:
 // const WASM_BY_EXAMPLE_VERSION = "0.0.0"

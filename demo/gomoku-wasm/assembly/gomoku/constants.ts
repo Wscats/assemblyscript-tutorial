@@ -11,9 +11,9 @@ export namespace constants {
     export const boardSize: i32 = 15 * 15;
 
     export function chessOfPlayer(player: PlayerRole): Chess {
-        if (player == PlayerRole.First) {
+        if (player === PlayerRole.First) {
             return Chess.White;
-        } else if (player == PlayerRole.Second) {
+        } else if (player === PlayerRole.Second) {
             return Chess.Black;
         } else {
             return Chess.None;
@@ -27,9 +27,9 @@ export namespace constants {
     }
 
     export function rival(chess: Chess): Chess {
-        if (chess == Chess.Black) {
+        if (chess === Chess.Black) {
             return Chess.White;
-        } else if (chess == Chess.White) {
+        } else if (chess === Chess.White) {
             return Chess.Black;
         } else {
             return Chess.None;
@@ -39,7 +39,7 @@ export namespace constants {
     // @ts-ignore
     @inline
     export function rivalPlayer(player: PlayerRole): PlayerRole {
-        if (player == PlayerRole.Second) {
+        if (player === PlayerRole.Second) {
             return PlayerRole.First;
         } else {
             return PlayerRole.Second;

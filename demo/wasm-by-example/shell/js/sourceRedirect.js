@@ -1,3 +1,5 @@
+'use strict';
+
 const sourceBaseUrl =
     "https://github.com/torch2424/wasm-by-example/tree/master";
 

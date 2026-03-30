@@ -28,7 +28,7 @@ vm.init(
 ).then(gameGUI => {
     try {
         let stateStr = localStorage.getItem(storageKey);
-        if (stateStr != null) {
+        if (stateStr !== null) {
             console.log("storage value", stateStr);
             let stateObject = JSON.parse(stateStr);
             console.log("stateObject", stateObject);

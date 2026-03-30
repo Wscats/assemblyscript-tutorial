@@ -1,3 +1,5 @@
+'use strict';
+
 // Supported homepage reading languages
 const readingLanguages = ["en-us", "pt-br"];
 

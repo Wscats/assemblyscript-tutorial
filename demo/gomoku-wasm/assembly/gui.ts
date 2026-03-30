@@ -51,7 +51,7 @@ export function onClick(x: i32, y: i32): Int8Array {
         return new Int8Array(0);
     }
     let state = game.onClick(x, y);
-    if (state.length == 2 && playWithAI) {
+    if (state.length === 2 && playWithAI) {
         aiPlayer.update(state);
     }
     return state;

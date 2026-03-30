@@ -1,3 +1,5 @@
+'use strict';
+
 // Initialization IIFE
 (() => {
     // Set our header langauge identifier

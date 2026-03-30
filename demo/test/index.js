@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require("fs");
 const loader = require("@assemblyscript/loader");
 const imports = {
