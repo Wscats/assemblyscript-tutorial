@@ -5,7 +5,10 @@
   "main": "index.js",
   "repository": "github:dguo/assemblyscript-demo",
   "scripts": {
-    "start": "static-server"
+    "start": "static-server",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
+    "test": "jest --coverage",
+    "type-check": "tsc --noEmit"
   },
   "author": {
     "name": "Danny Guo",
@@ -15,5 +18,8 @@
   "license": "MIT",
   "devDependencies": {
     "static-server": "^2.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
